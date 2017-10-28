@@ -21,6 +21,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        'migrationCommon' => [
+            'class' => 'app\components\migrations\MigrationCommon'
+        ],
     ],
     'params' => $params,
     /*
