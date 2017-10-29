@@ -1,10 +1,12 @@
 <?php
 
+use app\models\Person;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Company */
+/** @var Person $default_person */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Companies'), 'url' => ['index']];
@@ -31,8 +33,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'status',
-            'default_person_id',
         ],
     ]) ?>
-
+    <h4>Default contact person: </h4>
+    <?php
+    if ($default_person !== null) echo DetailView::widget([
+        'model' => $default_person,
+        'attributes' => [
+            'first_name',
+            'last_name',
+        ],
+    ]) ?>
+    <h4>Address: </h4>
+    <?php
+    if ($address !== null) echo DetailView::widget([
+        'model' => $address,
+        'attributes' => [
+            'address',
+            'city',
+        ],
+    ]) ?>
 </div>

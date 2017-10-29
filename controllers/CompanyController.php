@@ -50,11 +50,23 @@ class CompanyController extends Controller
      * Displays a single Company model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if ($model === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        $default_person = $model->getDefaultPerson()->one();
+        $address = null;
+        if ($default_person !== null)
+            $address = $default_person->getAddress()->one();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'default_person' => $default_person,
+            'address' => $address
         ]);
     }
 
@@ -86,6 +98,11 @@ class CompanyController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $companyPeople = Person::find()->where([
+            'status' => Person::STATUS_ACTIVE,
+            'company_id' => $model->id
+        ])->all();
+        $people = ArrayHelper::map($companyPeople, 'id', 'first_name');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -93,10 +110,7 @@ class CompanyController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'people' => ArrayHelper::map(Person::find()->where([
-                'status' => Person::STATUS_ACTIVE,
-                'company_id' => $model->id
-            ])->all(), 'id', 'name')
+            'people' => $people,
         ]);
     }
 

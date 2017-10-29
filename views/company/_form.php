@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?php
     if ($people !== null)
-        $form->field($model, 'default_person_id')->dropDownList($people, ['prompt' => ' -- Select default person --'])
+        echo $form->field($model, 'default_person_id')->dropDownList($people, ['prompt' => count($people)>0 ? ' -- Select default person --' : ' -- Add people to the company --'])
     ?>
 
     <div class="form-group">

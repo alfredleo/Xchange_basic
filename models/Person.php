@@ -41,8 +41,8 @@ class Person extends \yii\db\ActiveRecord
             [['status', 'company_id'], 'integer'],
             [['first_name', 'last_name'], 'string', 'max' => 100],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => array_keys(self::statuses())],
+            [['status'], 'default', 'value' => self::STATUS_ACTIVE],
+            [['status'], 'in', 'range' => array_keys(self::statuses())],
         ];
     }
 
