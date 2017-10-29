@@ -3,6 +3,8 @@
 use yii\db\Migration;
 
 /**
+ * yii migrate/create create_company_table --fields="name:string(100):notNull:unique,status:integer(2):defaultValue(1)"
+ *
  * Handles the creation of table `company`.
  */
 class m171029_134859_create_company_table extends Migration

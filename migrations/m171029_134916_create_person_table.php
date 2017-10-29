@@ -3,6 +3,9 @@
 use yii\db\Migration;
 
 /**
+ * yii migrate/create create_person_table --fields="first_name:string(100):notNull,last_name:string(100):notNull,
+ * status:integer(2):defaultValue(1),company_id:integer(11):foreignKey(company),default_person:boolean:defaultValue(0)"
+ *
  * Handles the creation of table `person`.
  * Has foreign keys to the tables:
  *

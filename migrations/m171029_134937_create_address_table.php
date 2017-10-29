@@ -3,6 +3,9 @@
 use yii\db\Migration;
 
 /**
+ * yii migrate/create create_address_table --fields="person_id:primaryKey:notNull:foreignKey(person),
+ * address:string(100):notNull,address2:string(100),city:string(100),status:integer(2):defaultValue(1)"
+ *
  * Handles the creation of table `address`.
  * Has foreign keys to the tables:
  *
