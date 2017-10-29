@@ -1,19 +1,22 @@
 <?php
 
 use app\models\Address;
+use app\models\Person;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Address */
 /* @var $form yii\widgets\ActiveForm */
+/* @var Person[] $people */
 ?>
 
 <div class="address-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'person_id')->textInput() ?>
+    <?= $form->field($model, 'person_id')->dropDownList($people, ['prompt' => ' -- Select Person --'])
+    ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 

@@ -1,9 +1,11 @@
 <?php
 
+use app\models\Company;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Person */
+/** @var Company[] $companies */
 
 $this->title = Yii::t('app', 'Update Person: {nameAttribute}', [
     'nameAttribute' => $model->id,
@@ -18,6 +20,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'companies' => $companies,
     ]) ?>
 
 </div>

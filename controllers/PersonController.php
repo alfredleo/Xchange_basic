@@ -93,6 +93,7 @@ class PersonController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'companies' => ArrayHelper::map(Company::find()->where(['status' => Company::STATUS_ACTIVE])->all(), 'id', 'name'),
         ]);
     }
 

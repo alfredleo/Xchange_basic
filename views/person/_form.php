@@ -21,10 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?php echo $form->field($model, 'status')->dropDownList(Person::statuses(),
         ['options' => $model->isNewRecord ? [Person::STATUS_ACTIVE => ['Selected' => 'selected']] : '']
-    )?>
+    ) ?>
 
-    <?= $form->field($model, 'company_id')->dropDownList($companies,['options' =>
-        ['prompt' => ' -- Select Company --']])
+    <?= $form->field($model, 'company_id')->dropDownList($companies, ['prompt' => ' -- Select Company --'])
     ?>
 
     <?= $form->field($model, 'default_person')->textInput() ?>

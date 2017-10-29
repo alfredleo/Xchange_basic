@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Person;
 use Yii;
 use app\models\Address;
 use app\models\AddressSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,6 +73,7 @@ class AddressController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'people' => ArrayHelper::map(Person::find()->where(['status' => Person::STATUS_ACTIVE])->all(), 'id', 'first_name'),
         ]);
     }
 
@@ -90,6 +93,7 @@ class AddressController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'people' => ArrayHelper::map(Person::find()->where(['status' => Person::STATUS_ACTIVE])->all(), 'id', 'first_name'),
         ]);
     }
 
