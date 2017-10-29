@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Address;
 use app\models\Person;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -7,6 +8,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Company */
 /** @var Person $default_person */
+/** @var Address $address */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Companies'), 'url' => ['index']];
