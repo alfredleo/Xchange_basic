@@ -19,6 +19,10 @@ use Yii;
  */
 class Person extends \yii\db\ActiveRecord
 {
+    const STATUS_NOT_ACTIVE = 1;
+    const STATUS_ACTIVE = 2;
+    const STATUS_DELETED = 3;
+
     /**
      * @inheritdoc
      */
@@ -37,6 +41,8 @@ class Person extends \yii\db\ActiveRecord
             [['status', 'company_id', 'default_person'], 'integer'],
             [['first_name', 'last_name'], 'string', 'max' => 100],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => array_keys(self::statuses())],
         ];
     }
 
@@ -69,5 +75,18 @@ class Person extends \yii\db\ActiveRecord
     public function getCompany()
     {
         return $this->hasOne(Company::className(), ['id' => 'company_id']);
+    }
+
+    /**
+     * Returns person status list
+     * @return array|mixed
+     */
+    public static function statuses()
+    {
+        return [
+            self::STATUS_NOT_ACTIVE => Yii::t('common', 'Not Active'),
+            self::STATUS_ACTIVE => Yii::t('common', 'Active'),
+            self::STATUS_DELETED => Yii::t('common', 'Deleted')
+        ];
     }
 }

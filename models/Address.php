@@ -17,6 +17,10 @@ use Yii;
  */
 class Address extends \yii\db\ActiveRecord
 {
+    const STATUS_NOT_ACTIVE = 1;
+    const STATUS_ACTIVE = 2;
+    const STATUS_DELETED = 3;
+
     /**
      * @inheritdoc
      */
@@ -35,6 +39,8 @@ class Address extends \yii\db\ActiveRecord
             [['status'], 'integer'],
             [['address', 'address2', 'city'], 'string', 'max' => 100],
             [['person_id'], 'exist', 'skipOnError' => true, 'targetClass' => Person::className(), 'targetAttribute' => ['person_id' => 'id']],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => array_keys(self::statuses())],
         ];
     }
 
@@ -58,5 +64,18 @@ class Address extends \yii\db\ActiveRecord
     public function getPerson()
     {
         return $this->hasOne(Person::className(), ['id' => 'person_id']);
+    }
+
+    /**
+     * Returns address status list
+     * @return array|mixed
+     */
+    public static function statuses()
+    {
+        return [
+            self::STATUS_NOT_ACTIVE => Yii::t('common', 'Not Active'),
+            self::STATUS_ACTIVE => Yii::t('common', 'Active'),
+            self::STATUS_DELETED => Yii::t('common', 'Deleted')
+        ];
     }
 }
