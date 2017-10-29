@@ -84,9 +84,9 @@ class Person extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            self::STATUS_NOT_ACTIVE => Yii::t('common', 'Not Active'),
-            self::STATUS_ACTIVE => Yii::t('common', 'Active'),
-            self::STATUS_DELETED => Yii::t('common', 'Deleted')
+            self::STATUS_NOT_ACTIVE => Yii::t('app', 'Not Active'),
+            self::STATUS_ACTIVE => Yii::t('app', 'Active'),
+            self::STATUS_DELETED => Yii::t('app', 'Deleted')
         ];
     }
 }
