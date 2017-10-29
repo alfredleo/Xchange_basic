@@ -56,7 +56,7 @@ class Person extends \yii\db\ActiveRecord
             'first_name' => Yii::t('app', 'First Name'),
             'last_name' => Yii::t('app', 'Last Name'),
             'status' => Yii::t('app', 'Status'),
-            'company_id' => Yii::t('app', 'Company ID'),
+            'company_id' => Yii::t('app', 'Company'),
             'default_person' => Yii::t('app', 'Default Person'),
         ];
     }

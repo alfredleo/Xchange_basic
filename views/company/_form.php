@@ -16,8 +16,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'status')->dropDownList(Company::statuses(),
-        ['options' => [Company::STATUS_ACTIVE => ['Selected'=>'selected']]])
-    ?>
+        ['options' => $model->isNewRecord ? [Company::STATUS_ACTIVE => ['Selected' => 'selected']] : '']
+    )?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

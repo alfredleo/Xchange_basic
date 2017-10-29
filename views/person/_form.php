@@ -20,8 +20,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'status')->dropDownList(Person::statuses(),
-        ['options' => [Person::STATUS_ACTIVE => ['Selected'=>'selected']]])
-    ?>
+        ['options' => $model->isNewRecord ? [Person::STATUS_ACTIVE => ['Selected' => 'selected']] : '']
+    )?>
 
     <?= $form->field($model, 'company_id')->dropDownList($companies,['options' =>
         ['prompt' => ' -- Select Company --']])

@@ -22,8 +22,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'status')->dropDownList(Address::statuses(),
-        ['options' => [Address::STATUS_ACTIVE => ['Selected'=>'selected']]])
-    ?>
+        ['options' => $model->isNewRecord ? [Address::STATUS_ACTIVE => ['Selected' => 'selected']] : '']
+    ) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
