@@ -1,11 +1,14 @@
 <?php
 
+use app\models\Company;
+use app\models\Person;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Person */
 /* @var $form yii\widgets\ActiveForm */
+/* @var Company[] $companies */
 ?>
 
 <div class="person-form">
@@ -16,9 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?php echo $form->field($model, 'status')->dropDownList(Person::statuses(),
+        ['options' => [Person::STATUS_ACTIVE => ['Selected'=>'selected']]])
+    ?>
 
-    <?= $form->field($model, 'company_id')->textInput() ?>
+    <?= $form->field($model, 'company_id')->dropDownList($companies,['options' =>
+        ['prompt' => ' -- Select Company --']])
+    ?>
 
     <?= $form->field($model, 'default_person')->textInput() ?>
 

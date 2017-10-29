@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Company;
 use Yii;
 use app\models\Person;
 use app\models\PersonSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,6 +73,7 @@ class PersonController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'companies' => ArrayHelper::map(Company::find()->where(['status' => Company::STATUS_ACTIVE])->all(), 'id', 'name'),
         ]);
     }
 
