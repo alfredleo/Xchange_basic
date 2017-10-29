@@ -18,7 +18,7 @@ class PersonSearch extends Person
     public function rules()
     {
         return [
-            [['id', 'status', 'company_id', 'default_person'], 'integer'],
+            [['id', 'status', 'company_id'], 'integer'],
             [['first_name', 'last_name'], 'safe'],
         ];
     }
@@ -62,7 +62,6 @@ class PersonSearch extends Person
             'id' => $this->id,
             'status' => $this->status,
             'company_id' => $this->company_id,
-            'default_person' => $this->default_person,
         ]);
 
         $query->andFilterWhere(['like', 'first_name', $this->first_name])

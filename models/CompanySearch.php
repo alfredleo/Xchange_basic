@@ -18,7 +18,7 @@ class CompanySearch extends Company
     public function rules()
     {
         return [
-            [['id', 'status'], 'integer'],
+            [['id', 'status', 'default_person_id'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -61,6 +61,7 @@ class CompanySearch extends Company
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
+            'default_person_id' => $this->default_person_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

@@ -10,7 +10,9 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property int $status
+ * @property int $default_person_id
  *
+ * @property Person $defaultPerson
  * @property Person[] $people
  */
 class Company extends \yii\db\ActiveRecord
@@ -34,9 +36,10 @@ class Company extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['status'], 'integer'],
+            [['status', 'default_person_id'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['name'], 'unique'],
+            [['default_person_id'], 'exist', 'skipOnError' => true, 'targetClass' => Person::className(), 'targetAttribute' => ['default_person_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => array_keys(self::statuses())],
         ];
@@ -51,7 +54,16 @@ class Company extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'status' => Yii::t('app', 'Status'),
+            'default_person_id' => Yii::t('app', 'Default Person'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDefaultPerson()
+    {
+        return $this->hasOne(Person::className(), ['id' => 'default_person_id']);
     }
 
     /**

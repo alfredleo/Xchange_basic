@@ -12,9 +12,9 @@ use Yii;
  * @property string $last_name
  * @property int $status
  * @property int $company_id
- * @property int $default_person
  *
  * @property Address $address
+ * @property Company[] $companies
  * @property Company $company
  */
 class Person extends \yii\db\ActiveRecord
@@ -38,7 +38,7 @@ class Person extends \yii\db\ActiveRecord
     {
         return [
             [['first_name', 'last_name'], 'required'],
-            [['status', 'company_id', 'default_person'], 'integer'],
+            [['status', 'company_id'], 'integer'],
             [['first_name', 'last_name'], 'string', 'max' => 100],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -57,7 +57,6 @@ class Person extends \yii\db\ActiveRecord
             'last_name' => Yii::t('app', 'Last Name'),
             'status' => Yii::t('app', 'Status'),
             'company_id' => Yii::t('app', 'Company'),
-            'default_person' => Yii::t('app', 'Default Person'),
         ];
     }
 
@@ -67,6 +66,14 @@ class Person extends \yii\db\ActiveRecord
     public function getAddress()
     {
         return $this->hasOne(Address::className(), ['person_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasMany(Company::className(), ['default_person_id' => 'id']);
     }
 
     /**
