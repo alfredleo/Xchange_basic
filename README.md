@@ -1,3 +1,19 @@
+
+This is the implementation of the task in yii2/basic:
+-------------------
+
+Following is a small task that you MUST complete in Yii2/basic. In case you are not able to complete it, email us whatever is done from the task.
+There are 3 entities; Company, Contact Person and Address. A company can have 1 or more contact persons. A contact person belongs to a company and will have 1 address. A company will have at least one default contact person . If more than one contact persons are added to a company, provide a way to make one of the contact person as default.
+ 
+Using above entities and relationships;
+1) Design a database to store important information for all 3 entities
+2) Perform CRUD operations for the entities
+3) Allow listing of important information for all 3 entities
+4) Listing page for Company should display default contact person and contact person’s address along with other important information
+
+
+
+
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
